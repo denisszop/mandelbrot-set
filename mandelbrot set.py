@@ -3,9 +3,11 @@ import numpy
 import matplotlib.pyplot as p
 import shelve
 
-#mandelbrot set: f_c(z) = z ** 2 + c, seed = 0, c = point in plot of complex numbers
-#check if x ** 2 + y ** 2 >= 4
-#if not, z ** 2 = (x ** 2 - y ** 2, 2 * x * y)
+#mandelbrot set: f_c(z) = z ** 2 + c, seed = 0, c = complex constant
+#(0 + 0i)(0 + 0i) + (0.5 + 0.5i) = (0.5 + 0.5i)
+#(0.5 + 0.5i)(0.5 + 0.5i) + (0.5 + 0.5i) = ...
+#x ** 2 + y ** 2 >= 4; if the absolute value is greater than 2, the function diverges to infinity
+#next iteration, z ** 2 = (x ** 2 - y ** 2, 2 * x * y)
 #add c
 
 start_time = time.time()
