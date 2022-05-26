@@ -1,7 +1,17 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import multiprocessing as mp
+import shelve
 
+class display:
+    def __init__(self, plot):
+        self.plot = plot
+    def render(self):
+        plt.imshow(self.plot.T, cmap='hot', extent=[-2, 0.5, -1, 1])
+        plt.xlabel('Real part')
+        plt.ylabel('Imaginary part')
+        plt.show()
+        
 max_iter = 100
 n = 200
 
@@ -22,5 +32,9 @@ if __name__ == '__main__':
     plot = np.delete(plot, (n - 1), axis=1)
     plot = np.concatenate((plot, np.flip(plot, axis=1)), axis=1)
 
-    plt.imshow(plot.T, cmap='hot', extent = [-2, 0.5, -1, 1])
-    plt.show()
+    db = shelve.open(r'C:\projekty\fractal\database', flag='n')
+    db['arr'] = plot
+    db.close()
+
+    img = display(plot)
+    img.render()
